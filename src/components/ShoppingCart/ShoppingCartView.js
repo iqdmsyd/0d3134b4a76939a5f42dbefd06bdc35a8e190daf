@@ -49,15 +49,24 @@ const CartLayer = styled.div`
   width: 100%;
   height: 50px;
   background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0), #fff);
+
+  transform: ${(props) =>
+    props.quantity > 0 ? "translateY(0)" : "translateY(120%)"};
+  transform-origin: bottom;
+  transition: transform 0.3s ease-in-out;
 `;
 
-const ShoppingCartView = () => {
+const ShoppingCartView = (props) => {
+  const { quantity, subtotal } = props;
+
   return (
-    <CartLayer>
+    <CartLayer quantity={quantity}>
       <CartPaper>
         <Wrapper>
           <CartInfo>
-            <HeaderText size={14}>5 Items | Rp 125,000</HeaderText>
+            <HeaderText size={14}>
+              {quantity} Items | Rp {subtotal}
+            </HeaderText>
             <BodyText size={12}>Termasuk ongkor kirim</BodyText>
           </CartInfo>
           <CartButton noGutter>
