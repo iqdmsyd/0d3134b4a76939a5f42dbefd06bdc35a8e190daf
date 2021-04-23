@@ -26,7 +26,8 @@ const BodyText = styled(StyledBodyText)`
   margin-bottom: ${(props) => `-${props.size - 2}px`};
 `;
 
-const AppBar = ({ location }) => {
+const AppBar = (props) => {
+  const { location, handleOpenModal } = props;
   return (
     <Wrapper>
       <Button noGutter>
@@ -36,7 +37,7 @@ const AppBar = ({ location }) => {
         <BodyText size={8} uppercase>
           alamat pengantaran
         </BodyText>
-        <Button noGutter>
+        <Button noGutter onClick={handleOpenModal}>
           <HeaderText as="h3" size={12}>
             {location}
           </HeaderText>

@@ -10,9 +10,23 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  transform: ${(props) => (props.open ? "translateY(0)" : "translateY(100%)")};
+  transition: transform 0.3s ease-in-out;
 
   z-index: 1000;
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 999;
+
+  display: ${(props) => (props.open ? "block" : "none")};
+  transition: display 0.3s linear;
 `;
 
 const Wrapper = styled.div`
@@ -66,43 +80,48 @@ const SuggestionWrapper = styled.div`
   }
 `;
 
-const LocationModal = () => {
+const LocationModal = (props) => {
+  const { open, handleCloseModal } = props;
+
   return (
-    <Container>
-      <Wrapper>
-        <CloseButton noGutter>
-          <IconButton icon="close" />
-        </CloseButton>
-        <HeaderText size={20}>
-          Cek makanan yang tersedia di lokasi kamu!
-        </HeaderText>
-        <form>
-          <InputWrapper>
-            <IconInside icon="location_on" />
-            <SearchInput
-              type="text"
-              id="search-location"
-              name="location"
-              placeholder="ex: Tokopedia Tower"
+    <>
+      <Overlay open={open} />
+      <Container open={open}>
+        <Wrapper>
+          <CloseButton noGutter onClick={handleCloseModal}>
+            <IconButton icon="close" />
+          </CloseButton>
+          <HeaderText size={20}>
+            Cek makanan yang tersedia di lokasi kamu!
+          </HeaderText>
+          <form>
+            <InputWrapper>
+              <IconInside icon="location_on" />
+              <SearchInput
+                type="text"
+                id="search-location"
+                name="location"
+                placeholder="ex: Tokopedia Tower"
+              />
+            </InputWrapper>
+          </form>
+          <SuggestionWrapper>
+            <SearchSuggestion
+              name="Tokopedia Tower"
+              address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
             />
-          </InputWrapper>
-        </form>
-        <SuggestionWrapper>
-          <SearchSuggestion
-            name="Tokopedia Tower"
-            address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
-          />
-          <SearchSuggestion
-            name="Tokopedia Tower"
-            address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
-          />
-          <SearchSuggestion
-            name="Tokopedia Tower"
-            address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
-          />
-        </SuggestionWrapper>
-      </Wrapper>
-    </Container>
+            <SearchSuggestion
+              name="Tokopedia Tower"
+              address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
+            />
+            <SearchSuggestion
+              name="Tokopedia Tower"
+              address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
+            />
+          </SuggestionWrapper>
+        </Wrapper>
+      </Container>
+    </>
   );
 };
 
