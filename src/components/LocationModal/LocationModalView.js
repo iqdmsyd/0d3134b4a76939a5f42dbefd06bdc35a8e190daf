@@ -82,6 +82,7 @@ const SuggestionWrapper = styled.div`
 
 const LocationModalView = (props) => {
   const { open, handleCloseModal } = props;
+  const { value, handleChange, handleSubmit } = props;
 
   return (
     <>
@@ -94,7 +95,7 @@ const LocationModalView = (props) => {
           <HeaderText size={20}>
             Cek makanan yang tersedia di lokasi kamu!
           </HeaderText>
-          <form>
+          <form onSubmit={handleSubmit}>
             <InputWrapper>
               <IconInside icon="location_on" />
               <SearchInput
@@ -102,23 +103,29 @@ const LocationModalView = (props) => {
                 id="search-location"
                 name="location"
                 placeholder="ex: Tokopedia Tower"
+                value={value}
+                onChange={handleChange}
               />
             </InputWrapper>
           </form>
-          <SuggestionWrapper>
-            <SearchSuggestion
-              name="Tokopedia Tower"
-              address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
-            />
-            <SearchSuggestion
-              name="Tokopedia Tower"
-              address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
-            />
-            <SearchSuggestion
-              name="Tokopedia Tower"
-              address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
-            />
-          </SuggestionWrapper>
+
+          {/* could be better */}
+          {value.length > 3 && (
+            <SuggestionWrapper>
+              <SearchSuggestion
+                name="Tokopedia Tower"
+                address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
+              />
+              <SearchSuggestion
+                name="Tokopedia Tower"
+                address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
+              />
+              <SearchSuggestion
+                name="Tokopedia Tower"
+                address="Jln. Subanagara RT/RW 003/008, Kelurahan Purbaratu, Kecamatan Purbaratu"
+              />
+            </SuggestionWrapper>
+          )}
         </Wrapper>
       </Container>
     </>
