@@ -27,8 +27,9 @@ const ButtonAdd = styled(Button)`
   }
 `;
 
-const FoodCard = ({ food }) => {
+const FoodCard = ({ food, handleAddItem }) => {
   const { name, rating, price } = food;
+
   return (
     <Paper>
       <CardImage
@@ -41,7 +42,7 @@ const FoodCard = ({ food }) => {
         <BodyText size={12}>by Kulina &bull; Uptown Lunch</BodyText>
         <Wrapper>
           <HeaderText size={16}>Rp {price}</HeaderText>
-          <ButtonAdd>
+          <ButtonAdd onClick={() => handleAddItem(food)}>
             ADD
             <IconButton icon="add" />
           </ButtonAdd>
