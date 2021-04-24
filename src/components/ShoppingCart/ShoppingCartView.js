@@ -5,6 +5,7 @@ import Button from "../Button";
 import IconButton from "../IconButton";
 import HeaderText from "../HeaderText";
 import BodyText from "../BodyText";
+import Wrapper from "../Wrapper";
 
 const CartPaper = styled(Paper)`
   position: fixed;
@@ -15,18 +16,7 @@ const CartPaper = styled(Paper)`
   background-color: #a23530;
 `;
 
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px;
-`;
-
-const CartInfo = styled.div`
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: flex-start;
-
+const CartInfoWrapper = styled(Wrapper)`
   > * {
     color: #f1f1f2;
   }
@@ -62,13 +52,13 @@ const ShoppingCartView = (props) => {
   return (
     <CartLayer quantity={quantity}>
       <CartPaper>
-        <Wrapper>
-          <CartInfo>
+        <Wrapper justify="space-between" p={8}>
+          <CartInfoWrapper direction="column" wrap="nowrap" align="flex-start">
             <HeaderText size={14}>
-              {quantity} Items | Rp {subtotal}
+              {quantity} Items | Rp {subtotal.toLocaleString()}
             </HeaderText>
             <BodyText size={12}>Termasuk ongkor kirim</BodyText>
-          </CartInfo>
+          </CartInfoWrapper>
           <CartButton noGutter>
             <IconButton icon="shopping_cart" />
           </CartButton>
