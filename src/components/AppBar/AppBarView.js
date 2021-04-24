@@ -23,7 +23,7 @@ const Wrapper = styled.div`
 `;
 
 const CustomBodyText = styled(BodyText)`
-  margin-bottom: ${(props) => `-${props.size - 2}px`};
+  margin-bottom: ${(props) => `-${props.size - 4}px`};
 `;
 
 const AppBarView = (props) => {
@@ -39,7 +39,7 @@ const AppBarView = (props) => {
           alamat pengantaran
         </CustomBodyText>
         <Button noGutter onClick={handleOpenModal}>
-          <HeaderText as="h3" size={12}>
+          <HeaderText as="h3" size={16}>
             {location}
           </HeaderText>
           <IconButton icon="expand_more" color="primary" />
