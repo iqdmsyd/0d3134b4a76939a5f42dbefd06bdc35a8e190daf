@@ -55,15 +55,20 @@ const Checked = styled.span`
   align-items: center;
 
   transition: all 0.2s linear;
+
+  p,
+  h3 {
+    color: ${(props) => (props.disabled ? "#e2e4e4" : "inherit")};
+  }
 `;
 
 const days = ["MIN", "SEN", "SEL", "RAB", "KAM", "JUM", "SAB"];
 
-const isToday = (date) => {
-  const today = new Date().getDate();
-  if (today === date) return true;
-  return false;
-};
+// const isToday = (date) => {
+//   const today = new Date().getDate();
+//   if (today === date) return true;
+//   return false;
+// };
 
 const DateRadio = ({ children, handleChange }) => {
   const dateObj = children;
@@ -76,12 +81,13 @@ const DateRadio = ({ children, handleChange }) => {
       <Radio
         type="radio"
         id={id}
-        defaultChecked={isToday(date)}
+        defaultChecked={day === 1}
         name="date"
         value={dateObj}
+        disabled={day === 0 || day === 6 ? true : false}
         onChange={(e) => handleChange(new Date(e.target.value))}
       />
-      <Checked>
+      <Checked disabled={day === 0 || day === 6 ? true : false}>
         <BodyText size={8}>{days[day]}</BodyText>
         <HeaderText size={14} as="h3">
           {date}
