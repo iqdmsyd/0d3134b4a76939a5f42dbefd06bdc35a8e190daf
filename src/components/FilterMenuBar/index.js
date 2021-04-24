@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import FilterMenuBarView from "./FilterMenuBarView";
 
 import createTwoWeeksDate from "../../utils/createTwoWeeksDate";
@@ -51,7 +51,30 @@ const FilterMenuBar = (props) => {
     }
   });
 
-  return React.createElement(FilterMenuBarView, { dateList, open, ...props });
+  const [dps, setDps] = useState(0);
+  const [slide, setSlide] = useState("");
+
+  const handleTouchStart = (e) => {
+    setDps(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    let dpe = e.changedTouches[0].clientX;
+    if (dps > dpe) {
+      setSlide("left");
+    } else if (dps < dpe) {
+      setSlide("right");
+    }
+  };
+
+  return React.createElement(FilterMenuBarView, {
+    dateList,
+    open,
+    handleTouchStart,
+    handleTouchMove,
+    slide,
+    ...props,
+  });
 };
 
 export default FilterMenuBar;
