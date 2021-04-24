@@ -65,7 +65,7 @@ const isToday = (date) => {
   return false;
 };
 
-const DateRadio = ({ children }) => {
+const DateRadio = ({ children, handleChange }) => {
   const dateObj = children;
   const id = dateObj.toDateString();
   const day = dateObj.getDay();
@@ -73,7 +73,14 @@ const DateRadio = ({ children }) => {
 
   return (
     <Label htmlFor={id}>
-      <Radio type="radio" id={id} defaultChecked={isToday(date)} name="date" />
+      <Radio
+        type="radio"
+        id={id}
+        defaultChecked={isToday(date)}
+        name="date"
+        value={dateObj}
+        onChange={(e) => handleChange(new Date(e.target.value))}
+      />
       <Checked>
         <BodyText size={8}>{days[day]}</BodyText>
         <HeaderText size={14} as="h3">

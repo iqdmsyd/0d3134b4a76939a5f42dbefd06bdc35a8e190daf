@@ -15,10 +15,11 @@ const DateSelectedText = styled(HeaderText)`
 
 const FoodCardListView = (props) => {
   const { items, handleAddItem } = props;
+  const { datePicked } = props;
 
   return (
     <>
-      <DateSelectedText size={14}>Kamis, 22 April 2021</DateSelectedText>
+      <DateSelectedText size={14}>{datePicked}</DateSelectedText>
 
       <Wrapper>
         {items.map((item, idx) => (

@@ -65,11 +65,17 @@ const DinnerChecked = styled(Checked)`
   border-bottom-right-radius: 4px;
 `;
 
-const MealsTypeToggle = () => {
+const MealsTypeToggle = ({ form }) => {
   return (
     <>
       <Label htmlFor="lunch">
-        <Radio type="radio" id="lunch" defaultChecked name="meals-type" />
+        <Radio
+          type="radio"
+          id="lunch"
+          defaultChecked
+          name="meals-type"
+          form={form}
+        />
         <LunchChecked>
           <HeaderText size={14} as="h3">
             Lunch
@@ -77,7 +83,7 @@ const MealsTypeToggle = () => {
         </LunchChecked>
       </Label>
       <Label htmlFor="dinner">
-        <Radio type="radio" id="dinner" name="meals-type" />
+        <Radio type="radio" id="dinner" name="meals-type" form={form} />
         <DinnerChecked>
           <HeaderText size={14} as="h3">
             Dinner

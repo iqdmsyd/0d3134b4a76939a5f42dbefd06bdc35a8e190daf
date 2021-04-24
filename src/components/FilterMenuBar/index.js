@@ -51,7 +51,7 @@ const FilterMenuBar = (props) => {
     }
   });
 
-  return React.createElement(FilterMenuBarView, { dateList, open });
+  return React.createElement(FilterMenuBarView, { dateList, open, ...props });
 };
 
 export default FilterMenuBar;

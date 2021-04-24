@@ -37,14 +37,16 @@ const MealsTypeWrapper = styled(Wrapper)`
   background-color: white;
 `;
 
-const FilterMenuBarView = ({ dateList, open }) => {
+const FilterMenuBarView = ({ dateList, open, changeDate }) => {
   return (
     <>
       <Container>
         <form id="pick-date">
           <Wrapper>
             {dateList.map((date, idx) => (
-              <DateRadio key={idx}>{date}</DateRadio>
+              <DateRadio key={idx} handleChange={changeDate}>
+                {date}
+              </DateRadio>
             ))}
           </Wrapper>
         </form>
