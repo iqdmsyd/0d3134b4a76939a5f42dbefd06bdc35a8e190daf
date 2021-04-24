@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 `;
 
 const DateSelectedText = styled(HeaderText)`
-  margin-bottom: 20px;
+  margin: 20px 0;
 `;
 
 const FoodCardListView = (props) => {
