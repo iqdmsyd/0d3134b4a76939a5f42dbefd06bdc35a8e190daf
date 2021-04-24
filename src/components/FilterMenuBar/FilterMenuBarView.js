@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   overflow-x: hidden;
   transform: translateX(-50%);
   transform: ${(props) =>
-    props.slide === "right" ? "translateX(0)" : "translateX(-50%)"};
+    props.swipe === "right" ? "translateX(0)" : "translateX(-50%)"};
 
   transition: transform 0.3s ease-in-out;
 `;
@@ -51,7 +51,7 @@ const FilterMenuBarView = ({
   changeDate,
   handleTouchStart,
   handleTouchMove,
-  slide,
+  swipe,
 }) => {
   return (
     <>
@@ -60,7 +60,7 @@ const FilterMenuBarView = ({
           <Wrapper
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
-            slide={slide}
+            swipe={swipe}
           >
             {dateList.map((date, idx) => (
               <DateRadio key={idx} handleChange={changeDate}>

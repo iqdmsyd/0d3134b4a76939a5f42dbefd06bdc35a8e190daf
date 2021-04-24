@@ -1,29 +1,28 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import FilterMenuBarView from "./FilterMenuBarView";
 
 import createTwoWeeksDate from "../../utils/createTwoWeeksDate";
+const dateList = createTwoWeeksDate();
 
 const FilterMenuBar = (props) => {
-  const [open, setOpen] = useState(true);
-  const dateList = createTwoWeeksDate();
+  const [open, setOpen] = useState(true); // open or close meals-type-toggle
+  const [dps, setDps] = useState(0); // date-picker wrapper touch start position value
+  const [swipe, setSwipe] = useState(""); // swipe direction
 
-  // let lastScrollTop = 0;
+  const handleTouchStart = (e) => {
+    setDps(e.targetTouches[0].clientX);
+  };
 
-  // function checkScroll(e) {
-  //   var st = window.pageYOffset; // Credits: "https://github.com/qeremy/so/blob/master/so.dom.js#L426"
-  //   if (st > lastScrollTop) {
-  //     // downscroll code
-  //     setOpen(false);
-  //   } else if (st < lastScrollTop) {
-  //     // upscroll code
-  //     setOpen(true);
-  //   }
-  //   lastScrollTop = st <= 0 ? 0 : st; // For Mobile or negative scrolling
-  // }
+  const handleTouchMove = (e) => {
+    let dpe = e.changedTouches[0].clientX;
+    if (dps > dpe) {
+      setSwipe("left");
+    } else if (dps < dpe) {
+      setSwipe("right");
+    }
+  };
 
-  // window.addEventListener("scroll", checkScroll, false);
-
-  // work in browser
+  // works in browser
   window.addEventListener(
     "wheel",
     (e) => {
@@ -36,14 +35,14 @@ const FilterMenuBar = (props) => {
     false
   );
 
-  // work in mobile
-  let ts;
+  // works in mobile
+  let ts; // touch start
   document.addEventListener("touchstart", (e) => {
     ts = e.targetTouches[0].clientY;
   });
 
   document.addEventListener("touchmove", (e) => {
-    let te = e.changedTouches[0].clientY;
+    let te = e.changedTouches[0].clientY; // touch end value
     if (ts > te) {
       setOpen(false);
     } else if (ts < te) {
@@ -51,28 +50,12 @@ const FilterMenuBar = (props) => {
     }
   });
 
-  const [dps, setDps] = useState(0);
-  const [slide, setSlide] = useState("");
-
-  const handleTouchStart = (e) => {
-    setDps(e.targetTouches[0].clientX);
-  };
-
-  const handleTouchMove = (e) => {
-    let dpe = e.changedTouches[0].clientX;
-    if (dps > dpe) {
-      setSlide("left");
-    } else if (dps < dpe) {
-      setSlide("right");
-    }
-  };
-
   return React.createElement(FilterMenuBarView, {
     dateList,
     open,
     handleTouchStart,
     handleTouchMove,
-    slide,
+    swipe,
     ...props,
   });
 };
